@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Canavar Avı</title>
+</head>
+    <div id="app">
+        <section class="row">
+            <div class="small-6 columns">
+                <h1 class="text-center">SEN</h1>
+                <div class="healthbar">
+                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="widthPlayer" >
+                        {{ player + "%"}}
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="small-6 columns">
+                <h1 class="text-center">CANAVAR</h1>
+                <div class="healthbar">
+                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="widthMonster">
+                        {{ monster + "%"}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="row controls" v-if="show">
+            <div class="small-12 columns">
+                <button id="start-game" @click="show = !show ">YENİ OYUN</button>
+            </div>
+        </section>
+        <section class="row controls" v-if="!show">
+            <div class="small-12 columns">
+                <button id="attack" @click="attack">SALDIRI</button>
+                <button id="special-attack" @click="specialAttack">ÖZEL SALDIRI</button>
+                <button id="heal" @click="firstAid">İLK YARDIM</button>
+                <button id="give-up" @click="giveUp">PES ET!</button>
+            </div>
+        </section>
+        <section class="row log" v-if="logs.length > 0">
+            <div class="small-12 columns">
+                <ul v-for>
+                    <li
+                        :class="{ 'player-turn' : log.control == 'player', 'monster-turn' : log.control == 'monster' }"
+                        v-for="log in logs"> {{ log.text }}</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
